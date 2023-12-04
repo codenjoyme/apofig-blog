@@ -1,0 +1,58 @@
+version: '3.5'
+
+services:
+  postgresdb:
+    container_name: blog-postgres
+    image: postgres:15.4
+    command: [ "postgres", "-c", "log_statement=all", "-c", "log_destination=stderr" ]
+    restart: always
+    volumes:
+      - /usr/app/blog/volumes/postgres:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+    ports:
+      - "5433:5432"
+
+  blog:
+    image: ${HOSTNAME_DOCKER_REGISTRY}/blog:${IMAGE_TAG}
+    container_name: blog
+    restart: always
+    environment:
+      - DELETE_SECRET=$DELETE_SECRET
+      - DB_HOST=postgresdb
+      - DB_PORT=5432
+      - DB_USERNAME=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_NAME=$DB_NAME
+      - VECTOR_DB_HOST=standalone
+      - VECTOR_DB_PORT=19530
+    expose:
+      - '8080'
+    command:
+      [
+        'java',
+        '-jar',
+        '/usr/src/app/blog.jar'
+      ]
+    depends_on:
+        - "postgresdb"
+        - "standalone"
+    labels:
+      autoheal: 'true' # allow docker-autoheal to restart if unhealthy
+    healthcheck:
+      test: curl -sS http://blog:8080/actuator/health || exit 1
+      interval: 5m
+      timeout: 10s
+      retries: 3
+    networks:
+      - default
+      - shared_network
+
+networks:
+  default:
+    name: apofig_network
+  shared_network:
+    external: true

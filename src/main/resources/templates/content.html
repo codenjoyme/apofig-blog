@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <th:block th:fragment="customScripts">
+    </th:block>
+
+    <th:block th:fragment="inner">
+        <div class="content" th:classappend="${reason}" th:utext="${content}"></div>
+    </th:block>
+</body>
+</html>

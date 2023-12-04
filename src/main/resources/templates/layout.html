@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${header}"></title>
+    <meta charset="UTF-8"/>
+    <!-- th:href="@{link}" / th:src="@{link}" will add context path to the link -->
+    <link rel="icon" type="image/x-icon" th:href="@{/static/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}">
+    <th:block th:replace="${pageName} :: customScripts"></th:block>
+    <script type="text/javascript" th:src="@{/static/jquery/3.7.1/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/model.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/layout.js}"></script>
+    <script type="text/javascript" th:src="@{'/static/js/' + ${pageName} + '.js'}"></script>
+    <script>
+        var contextPath = '[[@{/}]]'.slice(0, -1);
+    </script>
+</head>
+<body>
+    <div class="links">
+        <a id="pages-list-link">List of Pages</a>
+        <a id="swagger-link">Swagger</a>
+    </div>
+    <h1 th:text="${header}"></h1>
+    <th:block th:replace="${pageName} :: inner">
+        <!-- Here will be content from child template
+             with name equal to ${pageName} -->
+    </th:block>
+</body>
+</html>

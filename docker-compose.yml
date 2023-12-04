@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  db:
+    container_name: postgres-db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: apofig
+      POSTGRES_PASSWORD: apofig
+      POSTGRES_DB: apofig
+    ports:
+      - "5432:5432"
+
+networks:
+  default:
+    name: apofig

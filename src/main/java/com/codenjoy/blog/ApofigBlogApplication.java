@@ -1,0 +1,12 @@
+package com.codenjoy.blog;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ApofigBlogApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ApofigBlogApplication.class, args);
+    }
+}

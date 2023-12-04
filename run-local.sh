@@ -9,6 +9,7 @@ color() {
 }
 
 eval_echo() {
+    echo
     command=$1
     [[ "$2" == "" ]] && color=$BLUE || color=$2
     color "${command}" $color
@@ -34,7 +35,7 @@ cd target
 if [ $start_line -le 2 ]; then
   eval_echo "docker-compose down"
   eval_echo "docker-compose up -d"
-  eval_echo "sleep 30"
+  eval_echo "sleep 10"
 fi
   
 if [ $start_line -le 3 ]; then

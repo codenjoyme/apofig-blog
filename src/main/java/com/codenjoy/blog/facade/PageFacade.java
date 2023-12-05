@@ -6,20 +6,25 @@ import com.codenjoy.blog.service.GitService;
 import com.codenjoy.blog.service.MarkdownService;
 import com.codenjoy.blog.service.SecretService;
 import com.codenjoy.blog.service.log.LogService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.StringUtils.substringAfterLast;
+import static org.apache.commons.lang3.StringUtils.substringBefore;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PageFacade {
 
-    private static final String REPO = "https://github.com/codenjoyme/apofig.com.git";
-    private static final String DIRECTORY = "data/apofig.com";
+    @Value("${git.repo}")
+    private String repo;
+    private String directory;
 
     private final LogService logs;
     private final MarkdownService markdown;
@@ -27,12 +32,17 @@ public class PageFacade {
     private final GitService git;
     private final FileService files;
 
+    @PostConstruct
+    public void init() {
+        directory = "data/" + substringAfterLast(substringBefore(repo, ".git"), "/");
+    }
+
     public String content(String contextPath, String path) {
-        return markdown.load(contextPath, DIRECTORY + "/" + path);
+        return markdown.load(contextPath, directory + "/" + path);
     }
 
     public List<PageDTO> pages() {
-        return files.files(DIRECTORY).stream()
+        return files.files(directory).stream()
                 .filter(file -> file.endsWith(".md"))
                 .map(file -> PageDTO.builder()
                         .path(file)
@@ -56,15 +66,15 @@ public class PageFacade {
     public void load(String secret) {
         this.secret.validate(secret);
 
-        File dir = new File(DIRECTORY);
+        File dir = new File(directory);
         if (dir.exists()) {
             git.pull(dir)
                     .orElseThrow(() -> new IllegalArgumentException(
-                            "Can not pull repository: " + REPO));
+                            "Can not pull repository: " + repo));
         } else {
-            git.clone(REPO, dir)
+            git.clone(repo, dir)
                     .orElseThrow(() -> new IllegalArgumentException(
-                            "Can not clone repository: " + REPO));
+                            "Can not clone repository: " + repo));
         }
     }
 }

@@ -7,6 +7,7 @@
       <env name="DB_PORT" value="5432" />
       <env name="DB_USERNAME" value="apofig" />
       <env name="DELETE_SECRET" value="12345" />
+      <env name="GIT_REPO" value="https://github.com/codenjoyme/apofig.com.git" />
     </envs>
     <option name="MAIN_CLASS_NAME" value="com.codenjoy.blog.ApofigBlogApplication" />
     <module name="apofig-blog" />

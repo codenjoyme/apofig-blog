@@ -36,6 +36,7 @@
     DB_PORT=5432
     DB_USERNAME=apofig
     DELETE_SECRET=12345
+    GIT_REPO=https://github.com/your/repo.git
     ```
     
 - Open `http://localhost:8080/blog` in browser to open list of posts.
@@ -54,3 +55,8 @@
   docker-compose is already running and jar is already built.
 
 - Open `http://localhost:8080/blog` in browser to open list of posts.
+
+## Push changes to repository 
+
+- Run `bash git-push-all.sh` command to push changes (project and site repo) 
+  to repository.

@@ -47,7 +47,7 @@ public class PageFacade {
      * TODO Please improve
      */
     private static String description(String file) {
-        return file.replaceAll("(\\d{4})-(\\d{2})-(\\d{2})_(\\d{2})-(\\d{2})-\\d{2}_", "[$1_$2_$3 $2:$3] ")
+        return file.replaceAll("(\\d{4})-(\\d{2})-(\\d{2})_(\\d{2})-(\\d{2})-\\d{2}_", "[$1_$2_$3 $4:$5] ")
                 .replaceAll("-", " ")
                 .replaceAll("_", "-")
                 .replaceAll("\\.md", "");

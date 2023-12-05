@@ -1,6 +1,6 @@
 package com.codenjoy.blog.service;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -12,7 +12,7 @@ import static com.codenjoy.blog.service.ProfileStatus.NO_CACHE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FileService {
 
     private final ProfileStatus profile;

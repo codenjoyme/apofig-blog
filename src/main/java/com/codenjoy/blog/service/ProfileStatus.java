@@ -1,6 +1,6 @@
 package com.codenjoy.blog.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 
@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Controller
+@RequiredArgsConstructor
 public class ProfileStatus {
 
     public static final String NO_CACHE = "nocache";
@@ -16,7 +17,6 @@ public class ProfileStatus {
 
     public static final String ACTIVE_PROFILES = "activeProfiles";
 
-    @Autowired
     private Environment environment;
 
     public Boolean isEnabled(String profile) {

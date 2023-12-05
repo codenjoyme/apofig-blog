@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,8 +29,8 @@ public class UIController {
         return "layout";
     }
 
-    @GetMapping("/ui/page/{path}")
-    public String getPage(Model model, HttpServletRequest request, @PathVariable("path") String path) {
+    @GetMapping("/ui/page")
+    public String getPage(Model model, HttpServletRequest request, @RequestParam("path") String path) {
         String content = pages.content(request.getContextPath(), path);
         addAttribute(model, "content", content);
 

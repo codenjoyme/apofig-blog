@@ -17,8 +17,7 @@ public class MarkdownService {
     public String load(String contextPath, String file) {
         if (!file.endsWith(".md")
                 || file.contains("..")
-                || file.contains("/")
-                || file.contains("\\"))
+                || !file.startsWith("data"))
         {
             throw new IllegalArgumentException("Invalid file name: " + file);
         }

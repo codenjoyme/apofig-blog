@@ -26,6 +26,7 @@
         <flexmark-all.version>0.64.8</flexmark-all.version>
         <jquery.version>3.7.1</jquery.version>
         <reflections.version>0.10.2</reflections.version>
+        <jgit.version>3.0.0.201306101825-r</jgit.version>
     </properties>
     <dependencies>
         <dependency>
@@ -96,6 +97,11 @@
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>${reflections.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>${jgit.version}</version>
         </dependency>
 
         <dependency>

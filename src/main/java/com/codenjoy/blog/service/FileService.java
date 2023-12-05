@@ -3,10 +3,10 @@ package com.codenjoy.blog.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 import static com.codenjoy.blog.service.ProfileStatus.NO_CACHE;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -60,11 +60,7 @@ public class FileService {
         }
     }
 
-    public String loadLog(String fileName) {
-        if (fileName.contains("..") || !fileName.startsWith("logs")) {
-            return null;
-        }
-
-        return loadFile(fileName);
+    public List<String> files(String directory) {
+        return Arrays.asList(Objects.requireNonNull(new File(directory).list()));
     }
 }

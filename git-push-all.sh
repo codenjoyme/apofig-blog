@@ -35,6 +35,7 @@ color() {
 eval_echo() {
     command=$1
     [[ "$2" == "" ]] && color=$BLUE || color=$2
+    echo
     color "${command}" $color
     echo
     eval $command

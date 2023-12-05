@@ -24,7 +24,7 @@ public class UIController {
 
     @GetMapping("/ui/pages")
     public String listPages(Model model) {
-        model.addAttribute("header", "List of Pages");
+        model.addAttribute("header", "Table of Contents");
         model.addAttribute("pageName", "list-pages");
         return "layout";
     }

@@ -17,7 +17,7 @@ public class ProfileStatus {
 
     public static final String ACTIVE_PROFILES = "activeProfiles";
 
-    private Environment environment;
+    private final Environment environment;
 
     public Boolean isEnabled(String profile) {
         return Stream.of(environment.getActiveProfiles())

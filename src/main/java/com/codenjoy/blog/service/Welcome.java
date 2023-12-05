@@ -12,7 +12,7 @@ public class Welcome {
 
     @PostConstruct
     public void helloWorld() {
-        log.info("Started!");
+        log.info("Staring...");
         Toolkit.getDefaultToolkit().beep();
     }
 }

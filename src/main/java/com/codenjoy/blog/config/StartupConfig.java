@@ -1,6 +1,7 @@
 package com.codenjoy.blog.config;
 
 import com.codenjoy.blog.service.ProfileStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
+@Slf4j
 @Configuration
 public class StartupConfig {
 
@@ -54,6 +56,8 @@ public class StartupConfig {
             // we need this because of FileLogger is working in the HTTP context only,
             // and we need to get all pages before any HTTP request
             get(rest, "api/init");
+
+            log.info("Started!");
         };
     }
 

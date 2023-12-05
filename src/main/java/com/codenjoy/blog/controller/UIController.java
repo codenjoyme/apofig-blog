@@ -34,7 +34,6 @@ public class UIController {
         String content = pages.content(request.getContextPath(), path);
         addAttribute(model, "content", content);
 
-        model.addAttribute("header", "Content");
         model.addAttribute("pageName", "content");
         model.addAttribute("reason", "markdown");
         return "layout";

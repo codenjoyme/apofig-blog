@@ -9,8 +9,8 @@ import lombok.Data;
 @Schema(description = "The Page is represented by its path and description.")
 public class PageDTO {
 
-    @Schema(description = "Page path")
-    private String path;
+    @Schema(description = "File name")
+    private String fileName;
 
     @Schema(description = "Description of the Page")
     private String description;

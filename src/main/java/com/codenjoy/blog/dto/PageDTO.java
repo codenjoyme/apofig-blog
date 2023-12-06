@@ -14,4 +14,7 @@ public class PageDTO {
 
     @Schema(description = "Description of the Page")
     private String description;
+
+    @Schema(description = "Page settings")
+    private PageSettings settings;
 }

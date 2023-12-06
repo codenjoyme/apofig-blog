@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping
 @AllArgsConstructor
@@ -30,8 +28,8 @@ public class UIController {
     }
 
     @GetMapping("/ui/page")
-    public String getPage(Model model, HttpServletRequest request, @RequestParam("path") String path) {
-        String content = pages.content(request.getContextPath(), path);
+    public String getPage(Model model, @RequestParam("path") String path) {
+        String content = pages.content(path);
         addAttribute(model, "content", content);
 
         model.addAttribute("pageName", "content");

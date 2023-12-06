@@ -113,6 +113,6 @@ public class PagesController {
     {
         return ResponseEntity.ok()
                 .contentType(MediaType.TEXT_PLAIN)
-                .body(pages.content(request.getContextPath(), path));
+                .body(pages.content(path));
     }
 }

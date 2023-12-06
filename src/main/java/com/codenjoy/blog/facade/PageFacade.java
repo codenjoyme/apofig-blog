@@ -37,8 +37,8 @@ public class PageFacade {
         directory = "data/" + substringAfterLast(substringBefore(repo, ".git"), "/");
     }
 
-    public String content(String contextPath, String path) {
-        return markdown.load(contextPath, directory + "/" + path);
+    public String content(String path) {
+        return markdown.load(directory + "/" + path);
     }
 
     public List<PageDTO> pages() {

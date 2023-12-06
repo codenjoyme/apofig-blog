@@ -5,6 +5,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Document;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -14,7 +15,10 @@ public class MarkdownService {
 
     private final FileService files;
 
-    public String load(String contextPath, String file) {
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
+
+    public String load(String file) {
         if (!file.endsWith(".md")
                 || file.contains("..")
                 || !file.startsWith("data"))

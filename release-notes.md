@@ -16,3 +16,6 @@ The second is the actual page with content.
 # 2023-12-06
 - Refactoring. Move replace servlet context to service.
 - Refactoring. Move logic from PagesFacade to GitService. 
+- Refactoring. Rename PageDTO.path -> fileName.
+- Created PageService and moved there all logic with work with pages. Added possibility to 
+  parse page settings. The time for building the post title is taken from the settings. 

@@ -7,3 +7,11 @@ The second is the actual page with content.
 - Added the ability to load a site from git - this happens on app startup. 
 - If git repository is already cloned - it will be pulled.
 - Fixed styles of list and content pages.
+- UI. Rename 'List of Pages' to 'Table of content'.
+- Added build script to push everything.
+- Bug. Fixed time in pages list.
+- Refactoring. Make all components like @RequiredArgsConstructor.
+- Refactoring. Extracted git repo from constant to application.yml and .env
+
+# 2023-12-06
+- Refactoring. Move replace servlet context to service.

@@ -69,7 +69,7 @@ function actionLink(action, path, secret) {
 
 function pageLink(page) {
     return $('<a>')
-        .attr('href', `${contextPath}/ui/page?path=${page.fileName}`)
+        .attr('href', `${contextPath}/ui/page?fileName=${page.fileName}`)
         .text(`[${page.settings.time}] ${page.description}`);
 }
 

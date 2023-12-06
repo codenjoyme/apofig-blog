@@ -28,8 +28,8 @@ public class UIController {
     }
 
     @GetMapping("/ui/page")
-    public String getPage(Model model, @RequestParam("path") String path) {
-        String content = pages.content(path);
+    public String getPage(Model model, @RequestParam("fileName") String fileName) {
+        String content = pages.content(fileName);
         addAttribute(model, "content", content);
 
         model.addAttribute("pageName", "content");

@@ -15,3 +15,4 @@ The second is the actual page with content.
 
 # 2023-12-06
 - Refactoring. Move replace servlet context to service.
+- Refactoring. Move logic from PagesFacade to GitService. 

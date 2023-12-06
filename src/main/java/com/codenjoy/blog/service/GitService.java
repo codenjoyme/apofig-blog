@@ -38,7 +38,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class GitService {
 
-    public Optional<Git> clone(String repoURI, File directory) {
+    private Optional<Git> clone(String repoURI, File directory) {
         try {
             log.info("Cloning '{}' into '{}'", repoURI, directory.getAbsolutePath());
             return Optional.ofNullable(Git.cloneRepository()
@@ -51,7 +51,7 @@ public class GitService {
         }
     }
 
-    public Optional<Object> pull(File directory) {
+    private Optional<Object> pull(File directory) {
         try {
             log.info("Pulling '{}'", directory.getAbsolutePath());
 
@@ -68,6 +68,19 @@ public class GitService {
         } catch (IOException | GitAPIException e) {
             log.error("Can not pull repository: {}", directory.getAbsolutePath(), e);
             return Optional.empty();
+        }
+    }
+
+    public void pullOrClone(String repo, String directory) {
+        File dir = new File(directory);
+        if (dir.exists()) {
+            pull(dir)
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Can not pull repository: " + repo));
+        } else {
+            clone(repo, dir)
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Can not clone repository: " + repo));
         }
     }
 }

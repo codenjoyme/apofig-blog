@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -66,15 +65,6 @@ public class PageFacade {
     public void load(String secret) {
         this.secret.validate(secret);
 
-        File dir = new File(directory);
-        if (dir.exists()) {
-            git.pull(dir)
-                    .orElseThrow(() -> new IllegalArgumentException(
-                            "Can not pull repository: " + repo));
-        } else {
-            git.clone(repo, dir)
-                    .orElseThrow(() -> new IllegalArgumentException(
-                            "Can not clone repository: " + repo));
-        }
+        git.pullOrClone(repo, directory);
     }
 }

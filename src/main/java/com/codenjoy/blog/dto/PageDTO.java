@@ -17,4 +17,8 @@ public class PageDTO {
 
     @Schema(description = "Page settings")
     private PageSettings settings;
+
+    public String time() {
+        return settings.getTime();
+    }
 }

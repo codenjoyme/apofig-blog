@@ -33,5 +33,4 @@ public class PageSettings {
                     .filter(StringUtils::isNotBlank)
                     .collect(toList());
     }
-
 }

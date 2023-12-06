@@ -6,6 +6,7 @@ import com.codenjoy.blog.dto.PageSettings;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -41,6 +42,7 @@ public class PageService {
                         .description(description(file))
                         .settings(loadSettings(directory + "/" + file))
                         .build())
+                .sorted(Comparator.comparing(PageDTO::time))
                 .collect(toList());
     }
 }

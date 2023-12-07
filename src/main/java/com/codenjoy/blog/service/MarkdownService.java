@@ -18,15 +18,15 @@ public class MarkdownService {
     @Value("${server.servlet.context-path}")
     private String contextPath;
 
-    public String load(String file) {
-        if (!file.endsWith(".md")
-                || file.contains("..")
-                || !file.startsWith("data"))
+    public String load(String filePath) {
+        if (!filePath.endsWith(".md")
+                || filePath.contains("..")
+                || !filePath.startsWith("data"))
         {
-            throw new IllegalArgumentException("Invalid file name: " + file);
+            throw new IllegalArgumentException("Invalid file name: " + filePath);
         }
 
-        String markdown = addContext(files.loadFile(file), contextPath);
+        String markdown = addContext(files.loadFile(filePath), contextPath);
         return render(markdown);
     }
 

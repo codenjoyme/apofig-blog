@@ -10,9 +10,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.substringAfterLast;
-import static org.apache.commons.lang3.StringUtils.substringBefore;
-
 @Component
 @RequiredArgsConstructor
 public class PageFacade {
@@ -30,7 +27,7 @@ public class PageFacade {
 
     @PostConstruct
     public void init() {
-        directory = "data/" + substringAfterLast(substringBefore(repo, ".git"), "/");
+        directory = git.directory(repo);
     }
 
     public String content(String fileName) {
@@ -41,9 +38,9 @@ public class PageFacade {
         return pages.pages(directory);
     }
 
-    public void load(String secret) {
+    public String load(String secret) {
         this.secret.validate(secret);
 
-        git.pullOrClone(repo, directory);
+        return git.pullOrClone(repo);
     }
 }

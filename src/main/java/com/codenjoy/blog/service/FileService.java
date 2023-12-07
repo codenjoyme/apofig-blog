@@ -17,30 +17,30 @@ public class FileService {
 
     private final ProfileStatus profile;
 
-    private InputStream stream(String file) {
+    private InputStream stream(String filePath) {
         if (profile.isEnabled(NO_CACHE)) {
             try {
-                return new FileInputStream("src/main/resources/" + file);
+                return new FileInputStream("src/main/resources/" + filePath);
             } catch (FileNotFoundException e) {
                 // do nothing
             }
         }
         try {
-            return new FileInputStream(file);
+            return new FileInputStream(filePath);
         } catch (FileNotFoundException e) {
             // do nothing
         }
-        return getClass().getResourceAsStream("/" + file);
+        return getClass().getResourceAsStream("/" + filePath);
     }
 
     private String load(InputStream stream) throws IOException {
         return new String(stream.readAllBytes(), UTF_8);
     }
 
-    public String loadFile(String fileName) {
+    public String loadFile(String filePath) {
         InputStream stream = null;
         try {
-            stream = stream(fileName);
+            stream = stream(filePath);
             if (stream == null) {
                 return null;
             }

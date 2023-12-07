@@ -33,6 +33,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
+import static org.apache.commons.lang3.StringUtils.substringAfterLast;
+import static org.apache.commons.lang3.StringUtils.substringBefore;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -71,7 +74,12 @@ public class GitService {
         }
     }
 
-    public void pullOrClone(String repo, String directory) {
+    public String directory(String repo) {
+        return "data/" + substringAfterLast(substringBefore(repo, ".git"), "/");
+    }
+
+    public String pullOrClone(String repo) {
+        String directory = directory(repo);
         File dir = new File(directory);
         if (dir.exists()) {
             pull(dir)
@@ -82,5 +90,6 @@ public class GitService {
                     .orElseThrow(() -> new IllegalArgumentException(
                             "Can not clone repository: " + repo));
         }
+        return directory;
     }
 }

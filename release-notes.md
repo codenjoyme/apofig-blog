@@ -28,3 +28,4 @@ The second is the actual page with content.
 - Added UTF_8 encoding. 
 - Fixed tests - made them work. 
 - Updated Samples. 
+- Content loading via rest api.

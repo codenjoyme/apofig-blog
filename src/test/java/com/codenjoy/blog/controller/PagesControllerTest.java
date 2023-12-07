@@ -48,8 +48,8 @@ public class PagesControllerTest extends BaseControllerTest {
     /**
      * @see PagesController#getPage(String)
      */
-    private String getPage(String path) throws Exception {
-        return mvc.perform(get("/api/pages/{path}", path))
+    private String getPage(String fileName) throws Exception {
+        return mvc.perform(get("/api/pages/{fileName}", fileName))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
     }

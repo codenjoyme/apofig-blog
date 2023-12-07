@@ -93,7 +93,7 @@ public class PagesController {
 
     @Operation(summary = "Obtaining a Page by path",
             description = "A complete page file.",
-            parameters = @Parameter(name = "path", description = "Page path", example = SAMPLE_PAGE_NAME),
+            parameters = @Parameter(name = "fileName", description = "Page name", example = SAMPLE_PAGE_NAME),
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -107,10 +107,10 @@ public class PagesController {
                                     examples = @ExampleObject("Internal server error")))
             })
     @Order(3)
-    @GetMapping("/pages/{path}")
-    public ResponseEntity<String> getPage(@PathVariable("path") String path) {
+    @GetMapping("/pages/{fileName}")
+    public ResponseEntity<String> getPage(@PathVariable("fileName") String fileName) {
         return ResponseEntity.ok()
                 .contentType(MediaType.valueOf(TEXT_PLAIN_VALUE + ";charset=" + UTF_8.name()))
-                .body(pages.content(path));
+                .body(pages.content(fileName));
     }
 }

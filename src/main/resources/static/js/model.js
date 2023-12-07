@@ -17,8 +17,8 @@ async function getAllPages() {
     return fetchFor(`${contextPath}/api/pages`, GET_JSON);
 }
 
-async function getPage(path) {
-    return fetchFor(`${contextPath}/api/pages/${path}`, GET_TEXT);
+async function getPage(fileName) {
+    return fetchFor(`${contextPath}/api/pages/${fileName}`, GET_TEXT);
 }
 
 /**

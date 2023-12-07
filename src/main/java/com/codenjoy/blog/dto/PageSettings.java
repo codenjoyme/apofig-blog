@@ -29,7 +29,8 @@ public class PageSettings {
     public List<String> tags() {
         return isBlank(tags)
                 ? List.of()
-                : Arrays.stream(tags.split("[, ]"))
+                : Arrays.stream(tags.split(","))
+                    .map(String::trim)
                     .filter(StringUtils::isNotBlank)
                     .collect(toList());
     }

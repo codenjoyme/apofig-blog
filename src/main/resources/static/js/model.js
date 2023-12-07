@@ -81,7 +81,7 @@ function pageLink(page) {
 function tagLink(tag) {
     return $('<a>')
         .attr('href', `${contextPath}/ui/pages?tag=${tag}`)
-        .text(tag);
+        .text(`[${tag}]`);
 }
 
 /**

@@ -13,8 +13,9 @@ const GET_JSON = 'json';
 const GET_TEXT = 'text';
 const VOID = null;
 
-async function getAllPages() {
-    return fetchFor(`${contextPath}/api/pages`, GET_JSON);
+async function getAllPages(tag) {
+    var tagPart = !!tag ? `?tag=${tag}` : '';
+    return fetchFor(`${contextPath}/api/pages${tagPart}`, GET_JSON);
 }
 
 async function getPage(fileName) {

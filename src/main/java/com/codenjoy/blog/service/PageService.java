@@ -7,10 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
-import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.substringAfterLast;
 
 @Component
 @RequiredArgsConstructor
@@ -21,7 +22,24 @@ public class PageService {
 
     public PageSettings loadSettings(String filePath) {
         String content = files.loadFile(filePath);
-        String settings = substringAfter(substringBetween(content, "```", "```"), "post:");
+
+        // file contains block inside
+//        ```
+//        post:
+//          tags: hello, empty
+//          time: 2008-06-26 09:20:00
+//        ```
+        // I want to get this block without 'post:' by using regexp
+        // there can be other blocks like '```' in the file,
+        // so I need to get the block that starts with 'post:' and ends with '```'
+
+        Pattern pattern = Pattern.compile("post:(.*?)```", Pattern.DOTALL);
+        String settings = pattern.matcher(content).results()
+                .map(matchResult -> matchResult.group(1))
+                .findFirst()
+                .orElse(null);
+
+
         if (!isBlank(settings)) {
             return yaml.from(settings);
         }
@@ -34,7 +52,7 @@ public class PageService {
                 .replaceAll("\\.md", "");
     }
 
-    public List<PageDTO> pages(String directory) {
+    public Stream<PageDTO> pages(String directory) {
         return files.files(directory).stream()
                 .filter(file -> file.endsWith(".md"))
                 .map(file -> PageDTO.builder()
@@ -42,7 +60,6 @@ public class PageService {
                         .description(description(file))
                         .settings(loadSettings(directory + "/" + file))
                         .build())
-                .sorted(Comparator.comparing(PageDTO::time))
-                .collect(toList());
+                .sorted(Comparator.comparing(PageDTO::time));
     }
 }

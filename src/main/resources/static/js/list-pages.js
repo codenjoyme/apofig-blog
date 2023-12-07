@@ -2,8 +2,10 @@ $(document).ready(function() {
     loadPages();
 
     async function loadPages() {
-        let pages = await getAllPages();
         let secret = parameter('secret');
+        let tag = parameter('tag');
+
+        let pages = await getAllPages(tag);
 
         const $pagesDiv = $('#pages');
         $pagesDiv.html('');

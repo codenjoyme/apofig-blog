@@ -33,7 +33,7 @@ import static org.springframework.util.MimeTypeUtils.TEXT_PLAIN_VALUE;
  *
  *   HTTP GET    /api/pages
  *      Get a list of all Pages
- *      @see PagesController#getAllPages()
+ *      @see PagesController#getAllPages(String)
  *   
  *   HTTP GET    /api/pages/{pageName}
  *      Obtaining a Page content
@@ -73,6 +73,8 @@ public class PagesController {
 
     @Operation(summary = "Get a list of all Pages",
             description = "Pages are returned with path and description.",
+            parameters = @Parameter(name = "tag", allowEmptyValue = true,
+                                    description = "Tag name to filter"),
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -87,8 +89,8 @@ public class PagesController {
             })
     @Order(2)
     @GetMapping("/pages")
-    public List<PageDTO> getAllPages() {
-        return pages.pages();
+    public List<PageDTO> getAllPages(@RequestParam(name = "tag", required = false) String tag) {
+        return pages.pages(tag);
     }
 
     @Operation(summary = "Obtaining a Page by path",

@@ -1,5 +1,6 @@
 package com.codenjoy.blog.controller;
 
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 
 import static com.codenjoy.blog.controller.Samples.*;
@@ -11,9 +12,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PagesControllerTest extends BaseControllerTest {
 
     @Test
-    public void shouldGetAllPages() throws Exception {
+    public void shouldGetAllPages() {
         // when
-        String result = getAllPages();
+        String result = getAllPages(null);
 
         // then
         assertEquals(fix(SAMPLE_PAGES),
@@ -21,7 +22,61 @@ public class PagesControllerTest extends BaseControllerTest {
     }
 
     @Test
-    public void shouldGetPage() throws Exception {
+    public void shouldGetAllPages_byTagName_case1() {
+        // when
+        String result = getAllPages("hello");
+
+        // then
+        assertEquals(fix("[\n" +
+                        "  {\n" +
+                        "    'fileName': '2008-06-25_15-30-00_hello-world.md',\n" +
+                        "    'description': 'hello world',\n" +
+                        "    'settings': {\n" +
+                        "      'tags': 'hello',\n" +
+                        "      'time': '2008-06-25 15:30:00'\n" +
+                        "    }\n" +
+                        "  },\n" +
+                        "  {\n" +
+                        "    'fileName': '2008-06-26_09-20-00_Some-title.md',\n" +
+                        "    'description': 'Some title',\n" +
+                        "    'settings': {\n" +
+                        "      'tags': 'hello, empty',\n" +
+                        "      'time': '2008-06-26 09:20:00'\n" +
+                        "    }\n" +
+                        "  }\n" +
+                        "]"),
+                fix(result));
+    }
+
+    @Test
+    public void shouldGetAllPages_byTagName_case2() {
+        // when
+        String result = getAllPages("empty");
+
+        // then
+        assertEquals(fix("[\n" +
+                        "  {\n" +
+                        "    'fileName': '2008-06-26_09-20-00_Some-title.md',\n" +
+                        "    'description': 'Some title',\n" +
+                        "    'settings': {\n" +
+                        "      'tags': 'hello, empty',\n" +
+                        "      'time': '2008-06-26 09:20:00'\n" +
+                        "    }\n" +
+                        "  },\n" +
+                        "  {\n" +
+                        "    'fileName': '2008-07-15_20-03-00_Untitled.md',\n" +
+                        "    'description': 'Untitled',\n" +
+                        "    'settings': {\n" +
+                        "      'tags': 'empty',\n" +
+                        "      'time': '2008-07-15 20:03:00'\n" +
+                        "    }\n" +
+                        "  }\n" +
+                        "]"),
+                fix(result));
+    }
+
+    @Test
+    public void shouldGetPage() {
         // when
         String result = getPage(SAMPLE_PAGE_NAME);
 
@@ -37,10 +92,11 @@ public class PagesControllerTest extends BaseControllerTest {
      */
 
     /**
-     * @see PagesController#getAllPages()
+     * @see PagesController#getAllPages(String)
      */
-    private String getAllPages() throws Exception {
-        return prettyPrint(mvc.perform(get("/api/pages"))
+    @SneakyThrows
+    private String getAllPages(String tag) {
+        return prettyPrint(mvc.perform(get("/api/pages?tag={tag}", tag))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString());
     }
@@ -48,7 +104,8 @@ public class PagesControllerTest extends BaseControllerTest {
     /**
      * @see PagesController#getPage(String)
      */
-    private String getPage(String fileName) throws Exception {
+    @SneakyThrows
+    private String getPage(String fileName) {
         return mvc.perform(get("/api/pages/{fileName}", fileName))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();

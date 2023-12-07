@@ -29,3 +29,5 @@ The second is the actual page with content.
 - Fixed tests - made them work. 
 - Updated Samples. 
 - Content loading via rest api.
+- It is now possible to retrieve pages by tags, you just need to specify 
+  '[GET]/posts?tag=TAG_NAME'

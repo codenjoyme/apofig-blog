@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Component
 @RequiredArgsConstructor
 public class PageFacade {
@@ -34,8 +36,10 @@ public class PageFacade {
         return markdown.load(directory + "/" + fileName);
     }
 
-    public List<PageDTO> pages() {
-        return pages.pages(directory);
+    public List<PageDTO> pages(String tag) {
+        return pages.pages(directory)
+                .filter(page -> page.hasTag(tag))
+                .collect(toList());
     }
 
     public String load(String secret) {

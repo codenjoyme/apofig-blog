@@ -3,7 +3,11 @@ package com.codenjoy.blog.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -15,49 +19,27 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @RequiredArgsConstructor
 public class FileService {
 
+    public static final String SRC_RESOURCES = "src/main/resources/";
+
     private final ProfileStatus profile;
 
-    private InputStream stream(String filePath) {
+    public String loadFile(String filePath) {
         if (profile.isEnabled(NO_CACHE)) {
             try {
-                return new FileInputStream("src/main/resources/" + filePath);
-            } catch (FileNotFoundException e) {
+                Path path = Paths.get(SRC_RESOURCES + filePath);
+                return Files.readString(path, UTF_8);
+            } catch (IOException e) {
                 // do nothing
             }
         }
+
         try {
-            return new FileInputStream(filePath);
-        } catch (FileNotFoundException e) {
+            Path path = Paths.get(filePath);
+            return Files.readString(path, UTF_8);
+        } catch (IOException e) {
             // do nothing
         }
-        return getClass().getResourceAsStream("/" + filePath);
-    }
-
-    private String load(InputStream stream) throws IOException {
-        return new String(stream.readAllBytes(), UTF_8);
-    }
-
-    public String loadFile(String filePath) {
-        InputStream stream = null;
-        try {
-            stream = stream(filePath);
-            if (stream == null) {
-                return null;
-            }
-
-            return load(stream);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            try {
-                if (stream != null) {
-                    stream.close();
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        throw new IllegalArgumentException("Invalid file name: " + filePath);
     }
 
     public List<String> files(String directory) {

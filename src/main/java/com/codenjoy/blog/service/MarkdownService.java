@@ -8,12 +8,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import static com.codenjoy.blog.service.ProfileStatus.TEST;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class MarkdownService {
 
     private final FileService files;
+    private final ProfileStatus profile;
 
     @Value("${server.servlet.context-path}")
     private String contextPath;
@@ -21,7 +24,7 @@ public class MarkdownService {
     public String load(String filePath) {
         if (!filePath.endsWith(".md")
                 || filePath.contains("..")
-                || !filePath.startsWith("data"))
+                || (!filePath.startsWith("data") && !profile.isEnabled(TEST)))
         {
             throw new IllegalArgumentException("Invalid file name: " + filePath);
         }

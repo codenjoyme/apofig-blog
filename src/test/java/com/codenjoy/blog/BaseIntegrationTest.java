@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.File;
@@ -15,10 +16,14 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static com.codenjoy.blog.service.ProfileStatus.TEST;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 @SpringBootTest
-@ActiveProfiles("test")
+@ActiveProfiles(TEST)
 @ExtendWith(SpringExtension.class)
 @Import(TestConfig.class)
+@TestPropertySource(locations="classpath:test.properties")
 public abstract class BaseIntegrationTest {
 
     @Value("${logs.path}")
@@ -28,7 +33,7 @@ public abstract class BaseIntegrationTest {
         try {
             File file = new File(path);
             System.out.println("Loading file: " + file.getAbsolutePath());
-            return FileUtils.readFileToString(file, "UTF-8");
+            return FileUtils.readFileToString(file, UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
             return "";

@@ -16,11 +16,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static com.codenjoy.blog.controller.PagesController.REST_URL;
 import static com.codenjoy.blog.controller.Samples.*;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 import static org.springframework.util.MimeTypeUtils.TEXT_PLAIN_VALUE;
 
@@ -37,7 +37,7 @@ import static org.springframework.util.MimeTypeUtils.TEXT_PLAIN_VALUE;
  *   
  *   HTTP GET    /api/pages/{pageName}
  *      Obtaining a Page content
- *      @see PagesController#getPage(HttpServletRequest, String)
+ *      @see PagesController#getPage(String)
  *      
  */
 @Slf4j
@@ -93,7 +93,7 @@ public class PagesController {
 
     @Operation(summary = "Obtaining a Page by path",
             description = "A complete page file.",
-            parameters = @Parameter(name = "path", description = "Page path", example = SAMPLE_PAGE_PATH),
+            parameters = @Parameter(name = "path", description = "Page path", example = SAMPLE_PAGE_NAME),
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -108,11 +108,9 @@ public class PagesController {
             })
     @Order(3)
     @GetMapping("/pages/{path}")
-    public ResponseEntity<String> getPage(HttpServletRequest request,
-                                          @PathVariable("path") String path)
-    {
+    public ResponseEntity<String> getPage(@PathVariable("path") String path) {
         return ResponseEntity.ok()
-                .contentType(MediaType.TEXT_PLAIN)
+                .contentType(MediaType.valueOf(TEXT_PLAIN_VALUE + ";charset=" + UTF_8.name()))
                 .body(pages.content(path));
     }
 }

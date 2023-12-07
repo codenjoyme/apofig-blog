@@ -7,6 +7,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 @Configuration
 @Profile("nocache")
 public class ThymeleafConfig {
@@ -17,6 +19,7 @@ public class ThymeleafConfig {
             setPrefix("file:src/main/resources/templates/");
             setSuffix(".html");
             setTemplateMode("HTML5");
+            setCharacterEncoding(UTF_8.name());
             setCacheable(false);
         }};
     }

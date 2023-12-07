@@ -20,3 +20,11 @@ The second is the actual page with content.
 - Created PageService and moved there all logic with work with pages. Added possibility to 
   parse page settings. The time for building the post title is taken from the settings. 
 - Add sorting posts by time.
+
+# 2023-12-07
+- Reworked the file load method. 
+- Added test.properties for tests. 
+- Made it possible to work with local repositories for testing purposes. 
+- Added UTF_8 encoding. 
+- Fixed tests - made them work. 
+- Updated Samples. 

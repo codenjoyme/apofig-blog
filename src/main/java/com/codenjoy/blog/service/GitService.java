@@ -33,8 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
-import static org.apache.commons.lang3.StringUtils.substringAfterLast;
-import static org.apache.commons.lang3.StringUtils.substringBefore;
+import static org.apache.commons.lang3.StringUtils.*;
 
 @Slf4j
 @Component
@@ -75,6 +74,9 @@ public class GitService {
     }
 
     public String directory(String repo) {
+        if (repo.startsWith("file://")) {
+            return substringAfter(repo, "file://");
+        }
         return "data/" + substringAfterLast(substringBefore(repo, ".git"), "/");
     }
 

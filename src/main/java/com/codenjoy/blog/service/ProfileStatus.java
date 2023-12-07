@@ -14,8 +14,7 @@ public class ProfileStatus {
 
     public static final String NO_CACHE = "nocache";
     public static final String LOCAL = "local";
-
-    public static final String ACTIVE_PROFILES = "activeProfiles";
+    public static final String TEST = "test";
 
     private final Environment environment;
 

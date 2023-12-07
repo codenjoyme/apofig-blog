@@ -2,10 +2,7 @@ package com.codenjoy.blog.controller;
 
 import org.junit.jupiter.api.Test;
 
-import javax.servlet.http.HttpServletRequest;
-
-import static com.codenjoy.blog.controller.Samples.SAMPLE_PAGES;
-import static com.codenjoy.blog.controller.Samples.SAMPLE_PAGE_CONTENT;
+import static com.codenjoy.blog.controller.Samples.*;
 import static com.codenjoy.blog.utils.JsonUtils.prettyPrint;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -26,7 +23,7 @@ public class PagesControllerTest extends BaseControllerTest {
     @Test
     public void shouldGetPage() throws Exception {
         // when
-        String result = getPage("page.md");
+        String result = getPage(SAMPLE_PAGE_NAME);
 
         // then
         assertEquals(fix(SAMPLE_PAGE_CONTENT),
@@ -49,7 +46,7 @@ public class PagesControllerTest extends BaseControllerTest {
     }
 
     /**
-     * @see PagesController#getPage(HttpServletRequest, String)
+     * @see PagesController#getPage(String)
      */
     private String getPage(String path) throws Exception {
         return mvc.perform(get("/api/pages/{path}", path))

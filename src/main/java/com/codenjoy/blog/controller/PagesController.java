@@ -31,14 +31,21 @@ import static org.springframework.util.MimeTypeUtils.TEXT_PLAIN_VALUE;
  * Another thing is that the order of methods is important - it should be the same
  * as in the model.js file and in the Swagger UI.
  *
- *   HTTP GET    /api/pages
- *      Get a list of all Pages
+ *   HTTP GET    /api/init?secret={secret}
+ *      Load all blog content from GitHub.
+ *      @see PagesController#loadPages(String)
+ *
+ *   HTTP GET    /api/pages?tag={tag}
+ *      Get a list of all Pages. Tag paremater is optional.
  *      @see PagesController#getAllPages(String)
  *   
  *   HTTP GET    /api/pages/{pageName}
- *      Obtaining a Page content
+ *      Obtaining a Page content by name.
  *      @see PagesController#getPage(String)
- *      
+ *
+ *   HTTP GET    /api/pages/tags
+ *      Get a list of all pages tags.
+ *      @see PagesController#getAllTags()
  */
 @Slf4j
 @Tag(name = "Pages API")
@@ -48,7 +55,7 @@ import static org.springframework.util.MimeTypeUtils.TEXT_PLAIN_VALUE;
 public class PagesController {
 
     public static final String REST_URL = "/api";
-    
+
     private final PageFacade pages;
 
     @Operation(summary = "Load all blog content from GitHub",
@@ -114,5 +121,25 @@ public class PagesController {
         return ResponseEntity.ok()
                 .contentType(MediaType.valueOf(TEXT_PLAIN_VALUE + ";charset=" + UTF_8.name()))
                 .body(pages.content(fileName));
+    }
+
+    @Operation(summary = "Get a list of all pages tags",
+            description = "Distinct tags from all pages sorted alphabetically.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "OK. Tags list",
+                            content = @Content(mediaType = APPLICATION_JSON_VALUE,
+                                    examples = @ExampleObject(SAMPLE_TAGS))),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Internal server error",
+                            content = @Content(mediaType = TEXT_PLAIN_VALUE,
+                                    examples = @ExampleObject("Internal server error")))
+            })
+    @Order(4)
+    @GetMapping("/pages/tags")
+    public List<String> getAllTags() {
+        return pages.tags();
     }
 }

@@ -7,9 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.substringAfterLast;
 
@@ -61,5 +63,13 @@ public class PageService {
                         .settings(loadSettings(directory + "/" + file))
                         .build())
                 .sorted(Comparator.comparing(PageDTO::time));
+    }
+
+    public List<String> tags(String directory) {
+        return pages(directory)
+                .flatMap(page -> page.getSettings().tags().stream())
+                .distinct()
+                .sorted()
+                .collect(toList());
     }
 }

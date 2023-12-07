@@ -22,6 +22,10 @@ async function getPage(fileName) {
     return fetchFor(`${contextPath}/api/pages/${fileName}`, GET_TEXT);
 }
 
+async function getAllTags() {
+    return fetchFor(`${contextPath}/api/pages/tags`, GET_JSON);
+}
+
 /**
  * Utils methods
  */
@@ -74,12 +78,22 @@ function pageLink(page) {
         .text(`[${page.settings.time}] ${page.description}`);
 }
 
+function tagLink(tag) {
+    return $('<a>')
+        .attr('href', `${contextPath}/ui/pages?tag=${tag}`)
+        .text(tag);
+}
+
 /**
  * Hrefs parts for other links
  */
 
 function pagesListHref() {
     return `${contextPath}/ui/pages`;
+}
+
+function tagsListHref() {
+    return `${contextPath}/ui/pages/tags`;
 }
 
 function swaggerHref() {

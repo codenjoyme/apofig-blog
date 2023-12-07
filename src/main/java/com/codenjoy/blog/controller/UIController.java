@@ -23,6 +23,13 @@ public class UIController {
         return "layout";
     }
 
+    @GetMapping("/ui/pages/tags")
+    public String listTags(Model model) {
+        model.addAttribute("header", "Tags");
+        model.addAttribute("pageName", "list-tags");
+        return "layout";
+    }
+
     @GetMapping("/ui/page")
     public String getPage(Model model) {
         model.addAttribute("pageName", "content");

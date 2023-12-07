@@ -47,4 +47,8 @@ public class PageFacade {
 
         return git.pullOrClone(repo);
     }
+
+    public List<String> tags() {
+        return pages.tags(directory);
+    }
 }

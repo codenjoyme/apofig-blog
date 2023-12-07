@@ -33,6 +33,12 @@ public class Samples {
             "  }\n" +
             "]";
 
+    public static final String SAMPLE_TAGS =
+            "[\n" +
+            "  'empty',\n" +
+            "  'hello'\n" +
+            "]";
+
     public static final String SAMPLE_PAGE_CONTENT =
             "<h1>Some title</h1>\n" +
             "<p>Text with <strong>bold</strong>, <em>italic</em> and <code>code</code> words.</p>\n" +

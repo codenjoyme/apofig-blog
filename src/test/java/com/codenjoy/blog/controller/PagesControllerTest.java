@@ -22,6 +22,16 @@ public class PagesControllerTest extends BaseControllerTest {
     }
 
     @Test
+    public void shouldGetAllTags() {
+        // when
+        String result = getAllTags();
+
+        // then
+        assertEquals(fix(SAMPLE_TAGS),
+                fix(result));
+    }
+
+    @Test
     public void shouldGetAllPages_byTagName_case1() {
         // when
         String result = getAllPages("hello");
@@ -109,5 +119,15 @@ public class PagesControllerTest extends BaseControllerTest {
         return mvc.perform(get("/api/pages/{fileName}", fileName))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
+    }
+
+    /**
+     * @see PagesController#getAllTags()
+     */
+    @SneakyThrows
+    private String getAllTags() {
+        return prettyPrint(mvc.perform(get("/api/pages/tags"))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString());
     }
 }

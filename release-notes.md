@@ -31,3 +31,4 @@ The second is the actual page with content.
 - Content loading via rest api.
 - It is now possible to retrieve pages by tags, you just need to specify 
   '[GET]/posts?tag=TAG_NAME'
+- Added page with list of tags.

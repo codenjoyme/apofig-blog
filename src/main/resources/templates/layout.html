@@ -22,7 +22,7 @@
         <a id="tags-list-link">Tags</a>
         <a id="swagger-link">Swagger</a>
     </div>
-    <h1 th:if="${header}" th:text="${header}"></h1>
+    <h1 id="header" th:if="${header}" th:text="${header}"></h1>
     <th:block th:replace="${pageName} :: inner">
         <!-- Here will be content from child template
              with name equal to ${pageName} -->

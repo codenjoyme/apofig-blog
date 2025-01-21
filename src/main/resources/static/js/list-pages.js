@@ -6,6 +6,10 @@ $(document).ready(function() {
 
         let pages = await getAllPages(tag);
 
+        const $header = $('#header');
+        let info = tag ? `: tag=[${tag}]` : '';
+        $header.html($header.html() + info);
+
         const $pagesDiv = $('#pages');
         $pagesDiv.html('');
 

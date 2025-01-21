@@ -21,7 +21,7 @@
   in `src/main/resources` folder and override all sensitive properties from 
   `application.yml` file. This file is ignored by git.
 
-- Start Milvus database with docker. From project root folder run 
+- Start postgres database with docker. From project root folder run 
   `docker-compose up -d` command.
 
 - Run `ApofigBlogApplication` class.

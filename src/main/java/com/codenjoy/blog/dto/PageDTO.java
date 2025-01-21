@@ -3,6 +3,7 @@ package com.codenjoy.blog.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 import static com.vladsch.flexmark.util.misc.Utils.isBlank;
 
@@ -21,12 +22,17 @@ public class PageDTO {
     private PageSettings settings;
 
     public String time() {
-        return settings.getTime();
+        return settings.present()
+                ? settings.getTime()
+                : StringUtils.EMPTY;
     }
 
     public boolean hasTag(String tag) {
         if (isBlank(tag)) {
             return true;
+        }
+        if (!settings.present()) {
+            return false;
         }
         return settings.tags().contains(tag);
     }

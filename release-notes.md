@@ -34,3 +34,10 @@ The second is the actual page with content.
 - Added page with list of tags.
 - Fixed tags design - now I put it inside []
 - Split tags only by comma.
+
+# 2025-01-22
+- (aee962d7) The vertical scrollbar has been indented.
+- (--------) Now page settings tags are rendered and don't stay as text.
+  The post tags look like links. 
+  Also added a link to the source. 
+  Added some tests to check corner cases. 

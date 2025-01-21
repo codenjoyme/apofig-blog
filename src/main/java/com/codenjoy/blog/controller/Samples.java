@@ -8,19 +8,31 @@ public class Samples {
     public static final String SAMPLE_PAGES =
             "[\n" +
             "  {\n" +
+            "    'fileName': '2008-08-08_21-13-00_Without-settings.md',\n" +
+            "    'description': 'Without settings',\n" +
+            "    'settings': { }\n" +
+            "  },\n" +
+            "  {\n" +
             "    'fileName': '2008-06-25_15-30-00_hello-world.md',\n" +
             "    'description': 'hello world',\n" +
             "    'settings': {\n" +
             "      'tags': 'hello',\n" +
-            "      'time': '2008-06-25 15:30:00'\n" +
+            "      'time': '2008-06-25 15:30:00',\n" +
+            "      'source': 'https://site.com',\n" +
+            "      'position': {\n" +
+            "        '209': 299\n" +
+            "      }\n" +
             "    }\n" +
             "  },\n" +
             "  {\n" +
             "    'fileName': '2008-06-26_09-20-00_Some-title.md',\n" +
             "    'description': 'Some title',\n" +
             "    'settings': {\n" +
-            "      'tags': 'hello, empty',\n" +
-            "      'time': '2008-06-26 09:20:00'\n" +
+            "      'tags': 'hello, empty, with space',\n" +
+            "      'time': '2008-06-26 09:20:00',\n" +
+            "      'position': {\n" +
+            "        '456': 537\n" +
+            "      }\n" +
             "    }\n" +
             "  },\n" +
             "  {\n" +
@@ -28,7 +40,10 @@ public class Samples {
             "    'description': 'Untitled',\n" +
             "    'settings': {\n" +
             "      'tags': 'empty',\n" +
-            "      'time': '2008-07-15 20:03:00'\n" +
+            "      'time': '2008-07-15 20:03:00',\n" +
+            "      'position': {\n" +
+            "        '0': 62\n" +
+            "      }\n" +
             "    }\n" +
             "  }\n" +
             "]";
@@ -36,7 +51,8 @@ public class Samples {
     public static final String SAMPLE_TAGS =
             "[\n" +
             "  'empty',\n" +
-            "  'hello'\n" +
+            "  'hello',\n" +
+            "  'with space'\n" +
             "]";
 
     public static final String SAMPLE_PAGE_CONTENT =
@@ -67,10 +83,8 @@ public class Samples {
             "</li>\n" +
             "<li>five</li>\n" +
             "</ul>\n" +
-            "<pre><code>post:   \n" +
-            "  tags: hello, empty\n" +
-            "  time: 2008-06-26 09:20:00\n" +
-            "</code></pre>\n";
+            "<p>Tags: <a href='/blog/ui/pages?tag=hello'>hello</a>, <a href='/blog/ui/pages?tag=empty'>empty</a>, <a href='/blog/ui/pages?tag=with%20space'>with space</a></p>\n" +
+            "<p>Time: 2008-06-26 09:20:00</p>\n";
 
     public static final String SECURED_OPERATION =
             "This is secured operation. You should specify the secret key " +

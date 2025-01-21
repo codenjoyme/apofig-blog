@@ -43,15 +43,22 @@ public class PagesControllerTest extends BaseControllerTest {
                         "    'description': 'hello world',\n" +
                         "    'settings': {\n" +
                         "      'tags': 'hello',\n" +
-                        "      'time': '2008-06-25 15:30:00'\n" +
+                        "      'time': '2008-06-25 15:30:00',\n" +
+                        "      'source': 'https://site.com',\n" +
+                        "      'position': {\n" +
+                        "        '209': 299\n" +
+                        "      }\n" +
                         "    }\n" +
                         "  },\n" +
                         "  {\n" +
                         "    'fileName': '2008-06-26_09-20-00_Some-title.md',\n" +
                         "    'description': 'Some title',\n" +
                         "    'settings': {\n" +
-                        "      'tags': 'hello, empty',\n" +
-                        "      'time': '2008-06-26 09:20:00'\n" +
+                        "      'tags': 'hello, empty, with space',\n" +
+                        "      'time': '2008-06-26 09:20:00',\n" +
+                        "      'position': {\n" +
+                        "        '456': 537\n" +
+                        "      }\n" +
                         "    }\n" +
                         "  }\n" +
                         "]"),
@@ -69,8 +76,11 @@ public class PagesControllerTest extends BaseControllerTest {
                         "    'fileName': '2008-06-26_09-20-00_Some-title.md',\n" +
                         "    'description': 'Some title',\n" +
                         "    'settings': {\n" +
-                        "      'tags': 'hello, empty',\n" +
-                        "      'time': '2008-06-26 09:20:00'\n" +
+                        "      'tags': 'hello, empty, with space',\n" +
+                        "      'time': '2008-06-26 09:20:00',\n" +
+                        "      'position': {\n" +
+                        "        '456': 537\n" +
+                        "      }\n" +
                         "    }\n" +
                         "  },\n" +
                         "  {\n" +
@@ -78,7 +88,10 @@ public class PagesControllerTest extends BaseControllerTest {
                         "    'description': 'Untitled',\n" +
                         "    'settings': {\n" +
                         "      'tags': 'empty',\n" +
-                        "      'time': '2008-07-15 20:03:00'\n" +
+                        "      'time': '2008-07-15 20:03:00',\n" +
+                        "      'position': {\n" +
+                        "        '0': 62\n" +
+                        "      }\n" +
                         "    }\n" +
                         "  }\n" +
                         "]"),

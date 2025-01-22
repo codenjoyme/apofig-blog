@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -57,15 +58,23 @@ public class MarkdownService {
                             settings.getPosition().getRight())
                     .toString();
 
-            markdown = markdown
-                    + buildTags(settings.tags())
-                    + buildTime(settings.getTime())
-                    + buildSource(settings.sources());
+            markdown = markdown +
+                    makeBlockQuote(
+                            buildTags(settings.tags()),
+                            buildTime(settings.getTime()),
+                            buildSource(settings.sources()));
         }
 
         markdown = addContext(markdown, contextPath);
 
         return render(markdown);
+    }
+
+    private String makeBlockQuote(String... lines) {
+        return Arrays.stream(lines)
+                .filter(StringUtils::isNotBlank)
+                .map(line -> String.format("> %s<br>\n", line))
+                .collect(joining(""));
     }
 
     private String render(String markdown) {
@@ -79,7 +88,7 @@ public class MarkdownService {
         AtomicInteger counter = new AtomicInteger(0);
         return sources.isEmpty()
                 ? StringUtils.EMPTY
-                : String.format("\n\nSource: %s",
+                : String.format("**Source:** %s",
                     sources.stream()
                             .map(source -> String.format("[Link%s](%s) [(Web archive)](%s)",
                                     sources.size() > 1 ? counter.incrementAndGet() : StringUtils.EMPTY,
@@ -92,13 +101,13 @@ public class MarkdownService {
     private String buildTime(String time) {
         return time == null
                 ? StringUtils.EMPTY
-                : String.format("\n\nTime: %s", time);
+                : String.format("**Time:** %s", time);
     }
 
     private String buildTags(List<String> tags) {
         return tags.isEmpty()
                 ? StringUtils.EMPTY
-                : String.format("\n\nTags: %s",
+                : String.format("**Tags:** %s",
                     tags.stream()
                             .map(tag -> String.format("[%s](%s/ui/pages?tag=%s)",
                                     tag, CONTEXT_PATH, link(tag)))

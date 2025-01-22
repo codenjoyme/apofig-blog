@@ -95,8 +95,10 @@ public class Samples {
             "</li>\n" +
             "<li>five</li>\n" +
             "</ul>\n" +
-            "<p>Tags: <a href='/blog/ui/pages?tag=hello'>hello</a>, <a href='/blog/ui/pages?tag=empty'>empty</a>, <a href='/blog/ui/pages?tag=with%20space'>with space</a></p>\n" +
-            "<p>Time: 2008-06-26 09:20:00</p>\n";
+            "<blockquote>\n" +
+            "<p><strong>Tags:</strong> <a href='/blog/ui/pages?tag=hello'>hello</a>, <a href='/blog/ui/pages?tag=empty'>empty</a>, <a href='/blog/ui/pages?tag=with%20space'>with space</a><br>\n" +
+            "<strong>Time:</strong> 2008-06-26 09:20:00<br></p>\n" +
+            "</blockquote>\n";
 
     public static final String SECURED_OPERATION =
             "This is secured operation. You should specify the secret key " +

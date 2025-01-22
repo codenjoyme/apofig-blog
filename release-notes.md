@@ -44,5 +44,9 @@ The second is the actual page with content.
 - (d940d8ce) Merged test-repo into the main repo.
 - (aa4b7c2c) When viewing pages with a certain tag, the header now indicates the fact of selection by tags
 - (cf720195) You can now specify multiple sources
-- (--------) Link to a web archive in each source.
-- (--------) 
+- (2dd82a70) Link to a web archive in each source.
+
+# 2025-01-22
+- (9391bf58) If there is an error and the message does not fit in the error box, the styles make a line break.
+- (--------) The logic of settings has been improved - now it is highlighted in color like code sections.
+- (--------)    

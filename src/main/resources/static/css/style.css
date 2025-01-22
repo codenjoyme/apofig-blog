@@ -22,11 +22,18 @@ h1 {
 }
 
 p {
-    margin-bottom: 15px;
+    margin-bottom: 0;
 }
 
-code {
+blockquote > p {
+    margin-top: 0;
+}
+
+pre:has(> code), blockquote {
     background-color: #a1c7d5;
+    display: inline-block;
+    padding: 0.5rem;
+    margin-bottom: 0;
 }
 
 .links {

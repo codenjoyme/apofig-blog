@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.codenjoy.blog.service.ProfileStatus.TEST;
 import static java.util.stream.Collectors.joining;
@@ -75,11 +76,15 @@ public class MarkdownService {
     }
 
     private String buildSource(List<String> sources) {
+        AtomicInteger counter = new AtomicInteger(0);
         return sources.isEmpty()
                 ? StringUtils.EMPTY
                 : String.format("\n\nSource: %s",
                     sources.stream()
-                            .map(source -> String.format("[Link](%s)", link(source)))
+                            .map(source -> String.format("[Link%s](%s) [(Web archive)](%s)",
+                                    sources.size() > 1 ? counter.incrementAndGet() : StringUtils.EMPTY,
+                                    link(source),
+                                    link("https://web.archive.org/*/" + source)))
                             .collect(joining(", ")));
 
     }

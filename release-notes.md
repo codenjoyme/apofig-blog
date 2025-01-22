@@ -43,5 +43,6 @@ The second is the actual page with content.
   Added some tests to check corner cases. 
 - (d940d8ce) Merged test-repo into the main repo.
 - (aa4b7c2c) When viewing pages with a certain tag, the header now indicates the fact of selection by tags
-- (--------) You can now specify multiple sources
+- (cf720195) You can now specify multiple sources
+- (--------) Link to a web archive in each source.
 - (--------) 

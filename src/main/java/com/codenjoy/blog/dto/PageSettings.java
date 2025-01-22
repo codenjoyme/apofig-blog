@@ -45,4 +45,13 @@ public class PageSettings {
                     .filter(StringUtils::isNotBlank)
                     .collect(toList());
     }
+
+    public List<String> sources() {
+        return isBlank(source)
+                ? List.of()
+                : Arrays.stream(source.split("\n"))
+                    .map(String::trim)
+                    .filter(StringUtils::isNotBlank)
+                    .collect(toList());
+    }
 }

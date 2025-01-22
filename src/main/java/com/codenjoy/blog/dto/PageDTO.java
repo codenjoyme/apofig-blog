@@ -22,7 +22,7 @@ public class PageDTO {
     private PageSettings settings;
 
     public String time() {
-        return settings.present()
+        return settings.present() && settings.getTime() != null
                 ? settings.getTime()
                 : StringUtils.EMPTY;
     }

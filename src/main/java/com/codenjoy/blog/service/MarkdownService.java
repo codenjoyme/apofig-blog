@@ -59,7 +59,7 @@ public class MarkdownService {
             markdown = markdown
                     + buildTags(settings.tags())
                     + buildTime(settings.getTime())
-                    + buildSource(settings.getSource());
+                    + buildSource(settings.sources());
         }
 
         markdown = addContext(markdown, contextPath);
@@ -74,10 +74,14 @@ public class MarkdownService {
         return renderer.render(document);
     }
 
-    private String buildSource(String source) {
-        return source == null
+    private String buildSource(List<String> sources) {
+        return sources.isEmpty()
                 ? StringUtils.EMPTY
-                : String.format("\n\nSource: [Link](%s)", link(source));
+                : String.format("\n\nSource: %s",
+                    sources.stream()
+                            .map(source -> String.format("[Link](%s)", link(source)))
+                            .collect(joining(", ")));
+
     }
 
     private String buildTime(String time) {

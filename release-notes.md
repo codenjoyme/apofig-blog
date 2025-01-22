@@ -35,12 +35,13 @@ The second is the actual page with content.
 - Fixed tags design - now I put it inside []
 - Split tags only by comma.
 
-# 2025-01-22
+# 2025-01-21
 - (aee962d7) The vertical scrollbar has been indented.
 - (5d8647d4) Now page settings tags are rendered and don't stay as text.
   The post tags look like links. 
   Also added a link to the source. 
   Added some tests to check corner cases. 
 - (d940d8ce) Merged test-repo into the main repo.
-- (--------) When viewing pages with a certain tag, the header now indicates the fact of selection by tags
+- (aa4b7c2c) When viewing pages with a certain tag, the header now indicates the fact of selection by tags
+- (--------) You can now specify multiple sources
 - (--------) 

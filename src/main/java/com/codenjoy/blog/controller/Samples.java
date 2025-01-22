@@ -13,6 +13,18 @@ public class Samples {
             "    'settings': { }\n" +
             "  },\n" +
             "  {\n" +
+            "    'fileName': '2008-09-30_12-14-13_Multi-sources.md',\n" +
+            "    'description': 'Multi sources',\n" +
+            "    'settings': {\n" +
+            "      'source': 'https://site1.com\n" +
+            "https://site2.com\n" +
+            "https://site3.com',\n" +
+            "      'position': {\n" +
+            "        '16': 118\n" +
+            "      }\n" +
+            "    }\n" +
+            "  },\n" +
+            "  {\n" +
             "    'fileName': '2008-06-25_15-30-00_hello-world.md',\n" +
             "    'description': 'hello world',\n" +
             "    'settings': {\n" +
